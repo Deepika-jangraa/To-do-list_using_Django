@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-do Update</title>
+</head>
+<body>
+    <h1>To-do Update</h1>
+    
+    <form method="post" action="update" style="display: flex;flex-direction: column;gap:10px;width:50%">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" id="title" value="{{selected.title}}" name="title" >
+        
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"   >{{selected.description}}</textarea>
+        
+        <label for="due_date">Due Date:</label>
+        <input type="date" id="due_date" value="{{ selected.due_date|date:'Y-m-d' }}" name="due_date">        
+        <label for="tags">Tags:</label>
+        <input type="text" id="tags" value="{{selected.tags}}" name="tags">
+       
+        <label >Status:</label>
+        <select name="status"  >
+            <option value="select" {% if selected.status == 'select' %}selected{% endif %}>select</option>
+
+            <option value="OPEN"  {% if selected.status == 'OPEN' %}selected{% endif %}>OPEN</option>
+            <option value="WORKING"  {% if selected.status == 'WORKING' %}selected{% endif %}>WORKING</option>
+            <option value="OPEN"  {% if selected.status == 'OPEN' %}selected{% endif %}>OPEN</option>
+            <option value="OVERDUE"  {% if selected.status == 'OVERDUE' %}selected{% endif %}>OVERDUE</option>
+        </select>
+        <input type="number" name="id" value={{selected.id}} hidden/>
+        <button type="submit">Update</button>
+    </form>
+    
+
+    
+</body>
+</html>
